@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 # DESCRIPTION:
-# 
+# Addressbook program
+# Usage: addressbook.sh
 
 address_book="test.txt"
 
