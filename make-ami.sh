@@ -25,4 +25,4 @@ END=$(date +%s)
 RUNTIME=$((END-START))
 
 echo -e "\nScript runtime: ${RUNTIME}s"
-echo -e "---------------------------------------------\n\n"
+echo -e "---------------------------------------------\n\n"ad
