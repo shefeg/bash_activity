@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-#Dry-run mode
+# Dry-run mode
 
-echo "---------------------------------------------"
+echo "----------------------------------------------"
 echo "Script start time: $(date +%Y-%m-%d_%H-%M-%S)"
 START=$(date +%s)
 
@@ -25,4 +25,4 @@ END=$(date +%s)
 RUNTIME=$((END-START))
 
 echo -e "\nScript runtime: ${RUNTIME}s"
-echo -e "--------------------------------------------\n\n"
+echo -e "---------------------------------------------\n\n"
