@@ -2,7 +2,7 @@
 
 # Dry-run mode
 DATE_LOG=$(date "+%F %T")
-echo "----------------------------------------------"
+echo "-----------------------------------------------"
 echo "Script start time: $(date +%Y-%m-%d_%H-%M-%S)"
 START=$(date +%s)
 
@@ -25,4 +25,4 @@ END=$(date +%s)
 RUNTIME=$((END-START))
 
 echo -e "\nScript runtime: ${RUNTIME}s"
-echo -e "---------------------------------------------\n\n"ad
+echo -e "----------------------------------------------\n\n"
