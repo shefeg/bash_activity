@@ -15,7 +15,7 @@ for tag_value in ${TAG_NAMES}; do
     INSTANCE_IDS=$(aws ec2 describe-instances --output text --query 'Reservations[*].Instances[*].InstanceId' --filters "Name=tag:Name,Values=$tag_value")
     for instance in $INSTANCE_IDS; do
         echo "Making AMI for instance: \"$instance\""
-        aws ec2 create-image --instance-id $instance --name "$tag_value - $DATE" --description "$tag_value - $DATE" --no-reboot --dry-run    #<-- DRY-RUN IS ADDED.
+        aws ec2 create-image --instance-id "$instance" --name "$tag_value - $DATE" --description "$tag_value - $DATE" --no-reboot --dry-run    #<-- DRY-RUN IS ADDED.
         echo $?
         [ $? -eq 255 ] || echo "AMI for instance \"$instance\" complete!"
     done
