@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 # Dry-run mode
-DATE_LOG=$(date "+%F %T")
 echo "-----------------------------------------------"
 echo "Script start time: $(date +%Y-%m-%d_%H-%M-%S)"
 START=$(date +%s)

@@ -22,7 +22,7 @@ searchEntry()
 {
  echo -n "Please enter search text: "
  read -r text
- RESULT=$(grep $text $address_book)
+ RESULT=$(grep "$text" $address_book)
  echo '****************************************************'
  echo "$RESULT" | awk -F":" '{ print "----------------------------------------------------";
                                print "\t Name [ " $1 " ]";
@@ -49,13 +49,13 @@ removeEntry()
  [ "${#RECORDSET[@]}" -gt 1 ] && echo -n "Please type Name of the person which record you want to remove: " && \
  read -r name && FOUND=$(printf '%s\n' "${RECORDSET[@]}" | grep "$name")
 
- [ -z "$FOUND" ] && [ "$(echo $RESULT | tr ' ' '\n' | wc -l)" -gt 1 ] && echo "Name is incorrect" && \
+ [ -z "$FOUND" ] && [ "$(echo "$RESULT" | tr ' ' '\n' | wc -l)" -gt 1 ] && echo "Name is incorrect" && \
  echo -n "Please type Name of the person which record you want to remove: " && \
  read -r name && FOUND=$(printf '%s\n' "${RECORDSET[@]}" | grep "$name")
 
  echo -n "Do you really want to remove this record? (Y/N): "
  read -r answer
- answer=$(echo $answer | tr '[a-z]' '[A-Z]')
+ answer=$(echo "$answer" | tr '[:lower]' '[:upper]')
 
  if [ "$answer" == "Y" ] && [ ! -z "$FOUND" ]; then
    sed -i "/$FOUND/d" $address_book && echo "Record removed successfully"
@@ -76,4 +76,3 @@ while true; do
  [ "$input" == "remove" ] && removeEntry
  [ "$input" == 'q' ] && exit 0
 done
-
