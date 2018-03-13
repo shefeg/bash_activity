@@ -9,11 +9,11 @@ address_book="test.txt"
 addEntry()
 {
  echo -n "Enter user's full name (example: John Smith): "
- read name
+ read -r name
  echo -n "Enter user's phone number (example: 12345): "
- read phone
+ read -r phone
  echo -n "Enter user's email (example: john@example.com): "
- read email
+ read -r email
 
  echo "$name:$phone:$email" >> $address_book
 }
@@ -21,7 +21,7 @@ addEntry()
 searchEntry()
 {
  echo -n "Please enter search text: "
- read text
+ read -r text
  RESULT=$(grep $text $address_book)
  echo '****************************************************'
  echo "$RESULT" | awk -F":" '{ print "----------------------------------------------------";
@@ -38,7 +38,7 @@ removeEntry()
 {
  searchEntry
 
- [ $(echo $?) -eq 2 ] && return 2
+ [ $? -eq 2 ] && return 2
 
  declare -a RECORDSET
 
@@ -47,15 +47,15 @@ removeEntry()
  done
 
  [ "${#RECORDSET[@]}" -gt 1 ] && echo -n "Please type Name of the person which record you want to remove: " && \
- read name && FOUND=$(printf '%s\n' "${RECORDSET[@]}" | grep "$name")
+ read -r name && FOUND=$(printf '%s\n' "${RECORDSET[@]}" | grep "$name")
 
  [ -z "$FOUND" ] && [ "$(echo $RESULT | tr ' ' '\n' | wc -l)" -gt 1 ] && echo "Name is incorrect" && \
  echo -n "Please type Name of the person which record you want to remove: " && \
- read name && FOUND=$(printf '%s\n' "${RECORDSET[@]}" | grep "$name")
+ read -r name && FOUND=$(printf '%s\n' "${RECORDSET[@]}" | grep "$name")
 
  echo -n "Do you really want to remove this record? (Y/N): "
- read answer
- answer=`echo $answer | tr [a-z] [A-Z]`
+ read -r answer
+ answer=$(echo $answer | tr '[a-z]' '[A-Z]')
 
  if [ "$answer" == "Y" ] && [ ! -z "$FOUND" ]; then
    sed -i "/$FOUND/d" $address_book && echo "Record removed successfully"
@@ -70,7 +70,7 @@ removeEntry()
 
 while true; do
  echo -n "Please choose action: add, search, remove, q (to quit program): "
- read input
+ read -r input
  [ "$input" == "add" ] && addEntry
  [ "$input" == "search" ] && searchEntry
  [ "$input" == "remove" ] && removeEntry
